@@ -1144,12 +1144,17 @@
         }
         /* Responsive Styles */
         @media (max-width: 992px) {
-            .about-container,
+            .about-container {
+                display: block;
+                grid-template-columns: none;
+            }
             .contact-container {
-                grid-template-columns: 1fr;
+                display: block;
+                grid-template-columns: none;
             }
             .about-image {
-                order: -1;
+                margin-top: var(--space-xl);
+                order: 2;
             }
             .feature-card {
                 width: 240px;
@@ -1227,6 +1232,28 @@
                 width: 100%;
             }
         }
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: var(--text-xl);
+            }
+            .hero-subtitle {
+                font-size: var(--text-sm);
+            }
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: var(--text-lg);
+            }
+            .feature-title {
+                font-size: var(--text-md);
+            }
+            .feature-text {
+                font-size: var(--text-xs);
+            }
+        }
+        
+        
+
     </style>
 </head>
 <body>
@@ -2179,27 +2206,42 @@
         const statNumbers = document.querySelectorAll('.stat-number');
         const aboutSection = document.getElementById('about');
         function animateStats() {
-            statNumbers.forEach(stat => {
-                const target = +stat.getAttribute('data-target');
-                const count = +stat.innerText;
-                const increment = target / 100;
-                if (count < target) {
-                    stat.innerText = Math.ceil(count + increment);
-                    setTimeout(animateStats, 20);
-                } else {
-                    stat.innerText = target;
-                }
-            });
+    statNumbers.forEach(stat => {
+        const target = +stat.getAttribute('data-target');
+        const duration = 2000; // Animation duration in ms
+        const startTime = performance.now();
+        
+        function updateNumber(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const value = Math.floor(progress * target);
+            
+            stat.textContent = value;
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateNumber);
+            } else {
+                stat.textContent = target; // Ensure final value is exact
+            }
         }
+        
+        requestAnimationFrame(updateNumber);
+    });
+}
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        observer.observe(aboutSection);
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(entry.target);
+        }
+    });
+}, { 
+    threshold: window.innerWidth < 600 ? 0.01 : 0.1, // Lower threshold for mobile
+    rootMargin: window.innerWidth < 600 ? '0px 0px -30px 0px' : '0px 0px -100px 0px' // Less margin for mobile
+});
+        if (aboutSection) {
+            observer.observe(aboutSection);
+        }
 
         // Contact Form Submission
         const contactForm = document.getElementById('contactForm');
