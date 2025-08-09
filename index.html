@@ -255,8 +255,6 @@
             height: auto;
             min-height: 100vh;
             padding: var(--space-xxl) 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -266,6 +264,45 @@
             position: relative;
             overflow: hidden;
         }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        .video-background video.active {
+            opacity: 1;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+        
         .hero-content {
             max-width: 800px;
             margin: 0 auto var(--space-xl);
@@ -1229,9 +1266,39 @@
     </header>
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="video-background">
+            <video class="active" autoplay muted loop>
+                <source src="https://cdn.pixabay.com/video/2024/06/28/218541_tiny.mp4">
+            </video>
+            <video autoplay muted loop>
+                <source src="https://cdn.pixabay.com/video/2020/04/08/35277-407130773_tiny.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop>
+                <source src="https://cdn.pixabay.com/video/2022/10/05/133694-757677525_tiny.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted loop>
+                <source src="https://cdn.pixabay.com/video/2022/05/16/117093-710564011_tiny.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        <div class="video-controls">
+            <button id="playPauseBtn" class="video-control-btn">
+                <i class="fas fa-pause"></i>
+            </button>
+            <button id="muteUnmuteBtn" class="video-control-btn">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button id="nextVideoBtn" class="video-control-btn">
+                <i class="fas fa-step-forward"></i>
+            </button>
+        </div>
+    </div>
+    
+            <div class="video-overlay"></div>
+        </div>
+        
         <div class="hero-content">
             <h1 class="hero-title">Trichy sachu cab's</h1>
-           <b><p class="hero-subtitle">"All Over Tamil Nadu Drop Taxi Available ,<br> All Over Tamil Nadu Round Trip Available ,<br> All Over Tamil Nadu Cab Available ."</p></b>
+           <b> <p class="hero-subtitle">"All Over Tamil Nadu Drop Taxi Available , All Over Tamil Nadu Round Trip Available , All Over Tamil Nadu Cab Available ."</p></b>
             <div class="hero-buttons">
                 <a href="#fleet" class="btn btn-primary">Book Now</a>
                 <a href="#services" class="btn btn-secondary">Learn More</a>
@@ -2431,6 +2498,37 @@ document.addEventListener('DOMContentLoaded', function() {
             showProtectionMessage();
         }
     });
+     document.addEventListener('DOMContentLoaded', function() {
+            initAutocomplete('pickup', 'pickup-suggestions');
+            initAutocomplete('destination', 'destination-suggestions');
+            initAutocomplete('popupPickup', 'popupPickup-suggestions');
+            initAutocomplete('popupDestination', 'popupDestination-suggestions');
+            
+            // Video Background Slideshow
+            const videos = document.querySelectorAll('.video-background video');
+            let currentVideo = 0;
+            
+            // Show the first video
+            videos[currentVideo].classList.add('active');
+            
+            // Set interval to rotate videos
+            setInterval(() => {
+                // Hide current video
+                videos[currentVideo].classList.remove('active');
+                
+                // Move to next video
+                currentVideo = (currentVideo + 1) % videos.length;
+                
+                // Show next video
+                videos[currentVideo].classList.add('active');
+            }, 8000); // Change video every 8 seconds
+            
+            // Ensure all videos are playing (some browsers require this)
+            videos.forEach(video => {
+                video.play().catch(e => console.log('Video autoplay prevented:', e));
+            });
+        });
+
     </script>
 </body>
 </html>
