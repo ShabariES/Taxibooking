@@ -2469,40 +2469,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000);
     }
 
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        showProtectionMessage();
-    });
+    // // Disable right-click context menu
+    // document.addEventListener('contextmenu', function(e) {
+    //     e.preventDefault();
+    //     showProtectionMessage();
+    // });
 
     // Disable keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
-        // Disable Ctrl+U (View Source)
-        if (e.ctrlKey && e.keyCode === 85) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable F12 (Developer Tools)
-        else if (e.keyCode === 123) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable Ctrl+Shift+I (DevTools)
-        else if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable Ctrl+Shift+J (Console)
-        else if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable Ctrl+Shift+C (Inspect)
-        else if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-    });
+    // document.addEventListener('keydown', function(e) {
+    //     // Disable Ctrl+U (View Source)
+    //     if (e.ctrlKey && e.keyCode === 85) {
+    //         e.preventDefault();
+    //         showProtectionMessage();
+    //     }
+    //     // Disable F12 (Developer Tools)
+    //     else if (e.keyCode === 123) {
+    //         e.preventDefault();
+    //         showProtectionMessage();
+    //     }
+    //     // Disable Ctrl+Shift+I (DevTools)
+    //     else if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+    //         e.preventDefault();
+    //         showProtectionMessage();
+    //     }
+    //     // Disable Ctrl+Shift+J (Console)
+    //     else if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+    //         e.preventDefault();
+    //         showProtectionMessage();
+    //     }
+    //     // Disable Ctrl+Shift+C (Inspect)
+    //     else if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+    //         e.preventDefault();
+    //         showProtectionMessage();
+    //     }
+    // });
      document.addEventListener('DOMContentLoaded', function() {
             initAutocomplete('pickup', 'pickup-suggestions');
             initAutocomplete('destination', 'destination-suggestions');
