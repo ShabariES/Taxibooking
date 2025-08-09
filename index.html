@@ -1155,7 +1155,12 @@
                 width: 240px;
             }
         }
-        @media (max-width: 768px) {
+       @media (max-width: 768px) {
+    .hero {
+        min-height: 80vh; /* Responsive instead of fixed */
+        padding: 4rem 0;  /* Reduce padding on small screens */
+    }
+
             .nav-menu {
                 position: fixed;
                 top: 0;
