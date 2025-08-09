@@ -611,20 +611,18 @@
             height: auto;
             display: block;
         }
-.about-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
-    margin-top: var(--space-xl);
-}
-
-/* Responsive: Stack items in a single column on small screens */
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+        /* Responsive: Stack items in a single column on small screens */
 @media (max-width: 768px) {
     .about-stats {
         grid-template-columns: 1fr;
     }
 }
-
         .stat-item {
             text-align: center;
             padding: var(--space-lg);
@@ -2321,6 +2319,7 @@ function animateStats() {
         }
     });
 }
+// Replace your current observer with this:
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -2328,7 +2327,10 @@ const observer = new IntersectionObserver((entries) => {
             observer.unobserve(entry.target);
         }
     });
-}, { threshold: 0.5 });
+}, { 
+    threshold: 0.1, // Lower threshold for mobile
+    rootMargin: '0px 0px -100px 0px' // Adds 100px bottom margin to trigger earlier
+});
 observer.observe(aboutSection);
 
 // Contact Form Submission
