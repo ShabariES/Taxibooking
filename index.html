@@ -255,6 +255,8 @@
             height: auto;
             min-height: 100vh;
             padding: var(--space-xxl) 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -264,45 +266,6 @@
             position: relative;
             overflow: hidden;
         }
-        
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .video-background video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-        
-        .video-background video.active {
-            opacity: 1;
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: -1;
-        }
-        
         .hero-content {
             max-width: 800px;
             margin: 0 auto var(--space-xl);
@@ -1144,17 +1107,12 @@
         }
         /* Responsive Styles */
         @media (max-width: 992px) {
-            .about-container {
-                display: block;
-                grid-template-columns: none;
-            }
+            .about-container,
             .contact-container {
-                display: block;
-                grid-template-columns: none;
+                grid-template-columns: 1fr;
             }
             .about-image {
-                margin-top: var(--space-xl);
-                order: 2;
+                order: -1;
             }
             .feature-card {
                 width: 240px;
@@ -1232,28 +1190,6 @@
                 width: 100%;
             }
         }
-        @media (max-width: 400px) {
-            .hero-title {
-                font-size: var(--text-xl);
-            }
-            .hero-subtitle {
-                font-size: var(--text-sm);
-            }
-            .feature-icon {
-                width: 50px;
-                height: 50px;
-                font-size: var(--text-lg);
-            }
-            .feature-title {
-                font-size: var(--text-md);
-            }
-            .feature-text {
-                font-size: var(--text-xs);
-            }
-        }
-        
-        
-
     </style>
 </head>
 <body>
@@ -1293,37 +1229,6 @@
     </header>
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <!-- Video Background Slideshow -->
-        <div class="video-background">
-            <video class="active" autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2024/06/28/218541_tiny.mp4">
-            </video>
-            <video autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2020/04/08/35277-407130773_tiny.mp4" type="video/mp4">
-            </video>
-            <video autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2022/10/05/133694-757677525_tiny.mp4" type="video/mp4">
-            </video>
-            <video autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2022/05/16/117093-710564011_tiny.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-        <div class="video-controls">
-            <button id="playPauseBtn" class="video-control-btn">
-                <i class="fas fa-pause"></i>
-            </button>
-            <button id="muteUnmuteBtn" class="video-control-btn">
-                <i class="fas fa-volume-up"></i>
-            </button>
-            <button id="nextVideoBtn" class="video-control-btn">
-                <i class="fas fa-step-forward"></i>
-            </button>
-        </div>
-    </div>
-    
-            <div class="video-overlay"></div>
-        </div>
-        
         <div class="hero-content">
             <h1 class="hero-title">Premium Taxi Service in Your City</h1>
             <p class="hero-subtitle">Experience comfortable, safe, and reliable transportation with our professional drivers and modern fleet</p>
@@ -1438,197 +1343,336 @@
         </div>
     </section>
     <!-- Fleet Section -->
-    <section class="section bg-light" id="fleet">
-        <div class="container">
-            <h2 class="section-title">Our Fleet</h2>
-            <p class="section-subtitle">Choose from our modern, well-maintained vehicles</p>
-            <div class="fleet-filter">
-                <button class="filter-btn active" data-filter="all">All Vehicles</button>
-                <button class="filter-btn" data-filter="standard">Standard</button>
-                <button class="filter-btn" data-filter="premium">Premium</button>
-                <button class="filter-btn" data-filter="group">Group</button>
+   <!-- Fleet Section -->
+<section class="section bg-light" id="fleet">
+    <div class="container">
+        <h2 class="section-title">Our Fleet</h2>
+        <p class="section-subtitle">Choose from our modern, well-maintained vehicles</p>
+        <div class="fleet-filter">
+            <button class="filter-btn active" data-filter="all">All Vehicles</button>
+            <button class="filter-btn" data-filter="4seater">4 Seater</button>
+            <button class="filter-btn" data-filter="6seater">6 Seater</button>
+            <button class="filter-btn" data-filter="7seater">7 Seater</button>
+            <!-- <button class="filter-btn" data-filter="9seater">9 Seater</button> -->
+            <button class="filter-btn" data-filter="group">Group Travel</button>
+        </div>
+        <div class="fleet-grid">
+            <!-- 4 Seater Vehicles -->
+            <div class="vehicle-card" data-category="4seater" data-vehicle='{"name":"Etios","passengers":4}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/105.jpg?raw=true" alt="Toyota Etios">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Toyota Etios</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>4 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
             </div>
-            <div class="fleet-grid">
-                <div class="vehicle-card" data-category="standard" data-vehicle='{"name":"Tata Zest","passengers":4}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/f0116596146829c4287900fdd22cdf57.jpg?raw=true" alt="tata zeft">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Tata Zest</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>4 Passengers</span>
-                            </div>
-                            <!-- <div class="vehicle-feature">
-                                <i class="fas fa-suitcase"></i>
-                                <span>2 Bags</span>
-                            </div> -->
-                        </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
-                    </div>
+            <div class="vehicle-card" data-category="4seater" data-vehicle='{"name":"Swift","passengers":4}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/ngdaegb_1840534.avif" alt="Maruti Swift">
                 </div>
-                <div class="vehicle-card" data-category="standard" data-vehicle='{"name":"Swift","passengers":4}'>
-                    <div class="vehicle-image">
-                        <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/ngdaegb_1840534.avif" alt="Swift">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Swift</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>4 Passengers</span>
-                            </div>
-                            <!-- <div class="vehicle-feature">
-                                <i class="fas fa-suitcase"></i>
-                                <span>3 Bags</span>
-                            </div> -->
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Maruti Swift</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>4 Passengers</span>
                         </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
                     </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
                 </div>
-                <div class="vehicle-card" data-category="premium" data-vehicle='{"name":"Hyundai xcent","passengers":3}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/Hyundai_Grand_i10_1.0_GL_Sedan_2017_(33541605345).jpg?raw=true" alt="Luxury Sedan">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Hyundai xcent</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>6 Passengers</span>
-                            </div>
-                            
-                        </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
-                    </div>
+            </div>
+            <div class="vehicle-card" data-category="4seater" data-vehicle='{"name":"Honda Amaze","passengers":4}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/2024-06-22.webp" alt="Honda Amaze">
                 </div>
-                <div class="vehicle-card" data-category="premium" data-vehicle='{"name":"Honda Amaze","passengers":6}'>
-                    <div class="vehicle-image">
-                        <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/2024-06-22.webp" alt="Luxury Sedan">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Honda Amaze</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>6 Passengers</span>
-                            </div>
-                            
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Honda Amaze</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>4 Passengers</span>
                         </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
                     </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
                 </div>
-                <div class="vehicle-card" data-category="premium" data-vehicle='{"name":"Ertiga","passengers":6}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/WhatsApp%20Image%202025-08-02%20at%2010.57.31_3aa73c26.jpg?raw=true" alt="Ertiga">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Ertiga</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>6 Passengers</span>
-                            </div>
-                            
-                        </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
-                    </div>
+            </div>
+            <div class="vehicle-card" data-category="4seater" data-vehicle='{"name":"Tata Zest","passengers":4}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/f0116596146829c4287900fdd22cdf57.jpg?raw=true" alt="Tata Zest">
                 </div>
-                <div class="vehicle-card" data-category="premium" data-vehicle='{"name":"Etios","passengers":5,}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/105.jpg?raw=true" alt="Etios">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Etios</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>5 Passengers</span>
-                            </div>
-                            
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Tata Zest</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>4 Passengers</span>
                         </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
                     </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
                 </div>
-                                <div class="vehicle-card" data-category="premium" data-vehicle='{"name":"Innova Crysta","passengers":7,}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/innova.jpg?raw=true" alt="Etios">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Innova Crysta</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>7 Passengers</span>
-                            </div>
-                          
-                        </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
-                    </div>
+            </div>
+            <div class="vehicle-card" data-category="4seater" data-vehicle='{"name":"Hyundai Aura","passengers":4}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/aurahighlight_top_pc.avif" alt="Hyundai Aura">
                 </div>
-                <div class="vehicle-card" data-category="group" data-vehicle='{"name":"Xylo","passengers":7}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/IMG_20250802_105413.jpg?raw=true" alt="Xylo">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Xylo</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>7 Passengers</span>
-                            </div>
-                           
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Hyundai Aura</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>4 Passengers</span>
                         </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
                     </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
                 </div>
-                <div class="vehicle-card" data-category="group" data-vehicle='{"name":"Tempo Traveller","passengers":20}'>
-                    <div class="vehicle-image">
-                        <img src="https://github.com/ShabariES/Taxibooking/blob/main/tempo.jpg?raw=true" alt="Tempo Traveller">    
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Tempo Traveller</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>20 Passengers</span>
-                            </div>
-                            
-                        </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
-                    </div>
+            </div>
+            
+            <!-- 6 Seater Vehicles -->
+            <div class="vehicle-card" data-category="6seater" data-vehicle='{"name":"Ertiga","passengers":6}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/WhatsApp%20Image%202025-08-02%20at%2010.57.31_3aa73c26.jpg?raw=true" alt="Maruti Ertiga">
                 </div>
-                <div class="vehicle-card" data-category="group" data-vehicle='{"name":"Innova","passengers":7}'>
-                    <div class="vehicle-image">
-                        <img src="https://images.unsplash.com/photo-1753805122914-6366c65a4877?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5ub3ZhfGVufDB8fDB8fHww" alt="Mini Bus">
-                    </div>
-                    <div class="vehicle-content">
-                        <h3 class="vehicle-title">Innova</h3>
-                        <div class="vehicle-features">
-                            <div class="vehicle-feature">
-                                <i class="fas fa-user"></i>
-                                <span>7 Passengers</span>
-                            </div>
-                           
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Maruti Ertiga</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>6 Passengers</span>
                         </div>
-                        <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                        <div class="selected-badge">SELECTED</div>
                     </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="6seater" data-vehicle='{"name":"Toyota Rumion","passengers":6}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/rent-toyota-rumion.webp" alt="Toyota Rumion">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Toyota Rumion</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>6 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            
+            <!-- 7 Seater Vehicles -->
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Xylo","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/IMG_20250802_105413.jpg?raw=true" alt="Mahindra Xylo">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Mahindra Xylo</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Marazzo","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/marazzo_1_white_900%20x%20439.webp" alt="Mahindra Marazzo">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Mahindra Marazzo</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Kia Carens","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/kia%20carens.webp" alt="Kia Carens">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Kia Carens</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Innova","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://images.unsplash.com/photo-1753805122914-6366c65a4877?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5ub3ZhfGVufDB8fDB8fHww" alt="Toyota Innova">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Toyota Innova</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Innova Hycross","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/hycross.jpeg?raw=true" alt="Toyota Innova Hycross">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Innova Hycross</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Innova Crysta","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/innova.jpg?raw=true" alt="Toyota Innova Crysta">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Innova Crysta</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            
+            <!-- 9 Seater Vehicles -->
+            <div class="vehicle-card" data-category="7seater" data-vehicle='{"name":"Tavera","passengers":7}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/chevrolet%20tavera.webp" alt="Chevrolet Tavera">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Chevrolet Tavera</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>7 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            
+            <!-- Group Travel Vehicles -->
+            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"12 Seater Tempo","passengers":12}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/tempo.jpg?raw=true" alt="12 Seater Tempo Traveller">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">12 Seater Tempo</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>12 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"14 Seater Tempo","passengers":14}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/tempo-traveller-12-seater-rental-chennai-900x600.webp" alt="14 Seater Tempo Traveller">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">14 Seater Tempo</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>14 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"18 Seater Tourister","passengers":18}'>
+                <div class="vehicle-image">
+                    <img src="https://raw.githubusercontent.com/ShabariES/Taxibooking/refs/heads/main/18seater.webp" alt="18 Seater Tourister">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">18 Seater Tourister</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>18 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"21 Seater Kochi","passengers":21}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/21seater.png?raw=true" alt="21 Seater Kochi">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">21 Seater Kochi</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>21 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"25 Seater Kochi","passengers":25}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/25seater.jpg?raw=true" alt="25 Seater Kochi">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">25 Seater Kochi</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>25 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
                 </div>
             </div>
         </div>
-        
-    </section>
+    </div>
+</section>
     <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
@@ -1671,11 +1715,11 @@
                 <div class="testimonial-card">
                     <p class="testimonial-text">CityRide provides exceptional service every time. The drivers are professional and the cars are always clean and comfortable.</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="display:none;">
+                        <div class="author-avatar">
                             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
                         </div>
                         <div class="author-info">
-                            <h4>Vikram</h4>
+                            <h4>Sarah Johnson</h4>
                             <p>Regular Customer</p>
                         </div>
                     </div>
@@ -1683,11 +1727,11 @@
                 <div class="testimonial-card">
                     <p class="testimonial-text">I use CityRide for all my airport transfers. They're always on time and make traveling so much easier.</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="display:none;">
+                        <div class="author-avatar">
                             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
                         </div>
                         <div class="author-info">
-                            <h4>Shabari</h4>
+                            <h4>Michael Chen</h4>
                             <p>Business Traveler</p>
                         </div>
                     </div>
@@ -1695,11 +1739,11 @@
                 <div class="testimonial-card">
                     <p class="testimonial-text">The premium service is worth every penny. Perfect for special occasions when you want to arrive in style.</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="display:none;">
+                        <div class="author-avatar">
                             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Rodriguez">
                         </div>
                         <div class="author-info">
-                            <h4>Hariharan</h4>
+                            <h4>Emily Rodriguez</h4>
                             <p>Wedding Client</p>
                         </div>
                     </div>
@@ -2012,8 +2056,8 @@
                 selectedVehicle = JSON.parse(card.getAttribute('data-vehicle'));
                 document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
-                popupVehicleText.textContent =
-                    `${selectedVehicle.name} (${selectedVehicle.passengers} passengers)`;
+                popupVehicleText.textContent = 
+                    `${selectedVehicle.name} (${selectedVehicle.passengers} passengers )`;
                 bookingPopup.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
@@ -2103,162 +2147,124 @@
             initAutocomplete('destination', 'destination-suggestions');
             initAutocomplete('popupPickup', 'popupPickup-suggestions');
             initAutocomplete('popupDestination', 'popupDestination-suggestions');
-            
-            // Video Background Slideshow
-            const videos = document.querySelectorAll('.video-background video');
-            let currentVideo = 0;
-            
-            // Show the first video
-            videos[currentVideo].classList.add('active');
-            
-            // Set interval to rotate videos
-            setInterval(() => {
-                // Hide current video
-                videos[currentVideo].classList.remove('active');
-                
-                // Move to next video
-                currentVideo = (currentVideo + 1) % videos.length;
-                
-                // Show next video
-                videos[currentVideo].classList.add('active');
-            }, 8000); // Change video every 8 seconds
-            
-            // Ensure all videos are playing (some browsers require this)
-            videos.forEach(video => {
-                video.play().catch(e => console.log('Video autoplay prevented:', e));
-            });
         });
 
-        // Popup Form Submission to WhatsApp
-        popupBookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('popupName').value;
-            const email = document.getElementById('popupEmail').value;
-            const phone = document.getElementById('popupPhone').value;
-            const pickup = document.getElementById('popupPickup').value;
-            const destination = document.getElementById('popupDestination').value;
-            const datetimeInput = document.getElementById('popupDatetime');
-            const message = document.getElementById('popupMessage').value;
+// Popup Form Submission to WhatsApp
+// In your popupBookingForm submit event handler
+popupBookingForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('popupName').value;
+    const email = document.getElementById('popupEmail').value;
+    const phone = document.getElementById('popupPhone').value;
+    const pickup = document.getElementById('popupPickup').value;
+    const destination = document.getElementById('popupDestination').value;
+    const datetimeInput = document.getElementById('popupDatetime');
+    const message = document.getElementById('popupMessage').value;
 
-            // NEW: Robust date/time formatting
-            let bookingDateTime = 'ASAP'; // Default value
-            
-            if (datetimeInput.value) {
-                // Create date object from input (handles timezone correctly)
-                const date = new Date(datetimeInput.value);
-                
-                // Format date as "DD-MM-YYYY HH:MM AM/PM"
-                const day = String(date.getDate()).padStart(2, '0');
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const year = date.getFullYear();
-                
-                let hours = date.getHours();
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12; // Convert 0 to 12
-                const minutes = String(date.getMinutes()).padStart(2, '0');
-                
-                bookingDateTime = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
-            }
+    // NEW: Robust date/time formatting
+    let bookingDateTime = 'ASAP'; // Default value
+    
+    if (datetimeInput.value) {
+        // Create date object from input (handles timezone correctly)
+        const date = new Date(datetimeInput.value);
+        
+        // Format date as "DD-MM-YYYY HH:MM AM/PM"
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        
+        let hours = date.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Convert 0 to 12
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        
+        bookingDateTime = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+    }
 
-            // Construct WhatsApp message
-            const whatsappMessage = 
-                `*NEW TAXI BOOKING REQUEST*%0A%0A` +
-                `*Name:* ${name}%0A` +
-                `*Phone:* ${phone}%0A` +
-                `*Email:* ${email}%0A` +
-                `*Selected Vehicle:* ${selectedVehicle.name}%0A` +
-                `*Passengers:* ${selectedVehicle.passengers}%0A` +
-                `*Luggage:* ${selectedVehicle.bags} bags%0A` +
-                `*Pickup Location:* ${pickup}%0A` +
-                `*Destination:* ${destination || 'Not specified'}%0A` +
-                `*Date & Time:* ${bookingDateTime}%0A` +  // This will now work
-                `*Special Instructions:* ${message || 'None'}`;
+    // Construct WhatsApp message
+    // Extract only the date from bookingDateTime
+    const bookingDateOnly = bookingDateTime.split('T')[0];
 
-            // Open WhatsApp with the message
-            window.open(`https://wa.me/916369035633?text=${whatsappMessage}`, '_blank');
-            
-            // Close popup
-            bookingPopup.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
+    const whatsappMessage = 
+        `*NEW TAXI BOOKING REQUEST*%0A%0A` +
+        `*Name:* ${name}%0A` +
+        `*Phone:* ${phone}%0A` +
+        `*Email:* ${email}%0A` +
+        `*Selected Vehicle:* ${selectedVehicle.name}%0A` +
+        `*Passengers:* ${selectedVehicle.passengers}%0A` +
+        `*Pickup Location:* ${pickup}%0A` +
+        `*Destination:* ${destination || 'Not specified'}%0A` +
+        `*Date:* ${bookingDateOnly}%0A` +  
+        `*Special Instructions:* ${message || 'None'}`;
 
-        // Floating WhatsApp Button
-        floatWhatsApp.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!selectedVehicle) {
-                const whatsappMessage = `Hello CityRide! I'm interested in booking a ride.`;
-                window.open(`https://wa.me/916369035633?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-                return;
-            }
-            const whatsappMessage = `I'm interested in booking the ${selectedVehicle.name}.`;
-            window.open(`https://wa.me/916369035633?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-        });
+    window.open(`https://wa.me/916369035633?text=${whatsappMessage}`, '_blank');
 
-        setInterval(() => {
-            floatWhatsApp.classList.add('pulse');
-            setTimeout(() => floatWhatsApp.classList.remove('pulse'), 3000);
-        }, 30000);
+    bookingPopup.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}); // <-- FIX: Close the popupBookingForm submit event handler here
 
-        // Animate Stats
-        const statNumbers = document.querySelectorAll('.stat-number');
-        const aboutSection = document.getElementById('about');
-        function animateStats() {
+// Floating WhatsApp Button
+floatWhatsApp.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (!selectedVehicle) {
+        const whatsappMessage = `Hello CityRide! I'm interested in booking a ride.`;
+        window.open(`https://wa.me/916369035633?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+        return;
+    }
+    const whatsappMessage = `I'm interested in booking the ${selectedVehicle.name}.`;
+    window.open(`https://wa.me/916369035633?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+});
+
+setInterval(() => {
+    floatWhatsApp.classList.add('pulse');
+    setTimeout(() => floatWhatsApp.classList.remove('pulse'), 3000);
+}, 30000);
+
+// Animate Stats
+const statNumbers = document.querySelectorAll('.stat-number');
+const aboutSection = document.getElementById('about');
+function animateStats() {
     statNumbers.forEach(stat => {
         const target = +stat.getAttribute('data-target');
-        const duration = 2000; // Animation duration in ms
-        const startTime = performance.now();
-        
-        function updateNumber(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const value = Math.floor(progress * target);
-            
-            stat.textContent = value;
-            
-            if (progress < 1) {
-                requestAnimationFrame(updateNumber);
-            } else {
-                stat.textContent = target; // Ensure final value is exact
-            }
+        const count = +stat.innerText;
+        const increment = target / 100;
+        if (count < target) {
+            stat.innerText = Math.ceil(count + increment);
+            setTimeout(animateStats, 20);
+        } else {
+            stat.innerText = target;
         }
-        
-        requestAnimationFrame(updateNumber);
     });
 }
-        const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             animateStats();
             observer.unobserve(entry.target);
         }
     });
-}, { 
-    threshold: window.innerWidth < 600 ? 0.01 : 0.1, // Lower threshold for mobile
-    rootMargin: window.innerWidth < 600 ? '0px 0px -30px 0px' : '0px 0px -100px 0px' // Less margin for mobile
-});
-        if (aboutSection) {
-            observer.observe(aboutSection);
-        }
+}, { threshold: 0.5 });
+observer.observe(aboutSection);
 
-        // Contact Form Submission
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            const whatsappMessage = 
-                `*NEW CONTACT FORM SUBMISSION*%0A%0A` +
-                `*Name:* ${name}%0A` +
-                `*Email:* ${email}%0A` +
-                `*Message:* ${message}`;
-            window.open(`https://wa.me/916369035633?text=${whatsappMessage}`, '_blank');
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
-        });
+// Contact Form Submission
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const whatsappMessage = 
+        `*NEW CONTACT FORM SUBMISSION*%0A%0A` +
+        `*Name:* ${name}%0A` +
+        `*Email:* ${email}%0A` +
+        `*Message:* ${message}`;
+    window.open(`https://wa.me/916369035633?text=${whatsappMessage}`, '_blank');
+    alert('Thank you for your message! We will get back to you soon.');
+    contactForm.reset();
+});
 
         // Initialize the map
 document.addEventListener('DOMContentLoaded', function() {
