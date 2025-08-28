@@ -1238,6 +1238,19 @@
                 width: 100%;
             }
         }
+        .logo-image {
+    width: 80px;          /* Small width for the logo */
+    height: auto;         /* Maintain aspect ratio */
+    border-radius: 5px;   /* Slightly rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: block;       
+    margin: 0 auto;       /* Center the logo horizontally */
+}
+
+.logo-image {
+    max-width: 100%;
+    height: auto;
+}
     </style>
 </head>
 <body>
@@ -1246,8 +1259,8 @@
         <div class="container">
             <nav class="nav-container">
                 <a href="#" class="logo">
-                    <i class="fas fa-taxi"></i>
-                    <span>CityRide</span>
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/logo.jpg?raw=true" alt="logo" class="logo-image">&nbsp;&nbsp;
+                    <span>Trichy Sachu Cab</span>
                 </a>
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
