@@ -15,15 +15,15 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
     <style>
         :root {
-            /* Vibrant Color Palette */
-            --primary: #FF6B6B;
-            --primary-dark: #FF5252;
-            --secondary: #4ECDC4;
-            --accent: #FFE66D;
-            --dark: #292F36;
-            --light: #F7FFF7;
-            --gray: #6C757D;
-            --success: #6BCB77;
+            /* Black & Orange Color Palette */
+            --primary: #FF7700;
+            --primary-dark: #E56A00;
+            --secondary: #333333;
+            --accent: #FFAA00;
+            --dark: #121212;
+            --light: #F5F5F5;
+            --gray: #888888;
+            --success: #4CAF50;
             /* Spacing */
             --space-xs: 0.5rem;
             --space-sm: 1rem;
@@ -41,10 +41,10 @@
             --text-xxl: 2rem;
             --text-xxxl: 3rem;
             /* Shadows */
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.6);
             /* Transitions */
             --transition-fast: 0.2s ease;
             --transition-normal: 0.3s ease;
@@ -58,14 +58,15 @@
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            color: var(--light);
+            background-color: black;
             overflow-x: hidden;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             line-height: 1.2;
+            color: var(--light);
         }
         a {
             text-decoration: none;
@@ -92,6 +93,7 @@
             display: inline-block;
             text-align: center;
             width: 100%;
+            color: var(--primary);
         }
         .section-title::after {
             content: '';
@@ -127,31 +129,33 @@
         }
         .btn-primary {
             background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
         }
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+            box-shadow: 0 6px 20px rgba(255, 119, 0, 0.5);
+            color: var(--light);
         }
         .btn-secondary {
             background: var(--secondary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+            color: var(--light);
+            box-shadow: 0 4px 15px rgb(0, 0, 0);
         }
         .btn-secondary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+            box-shadow: 0 6px 20px rgba(51, 51, 51, 0.5);
+            background: black;
         }
         .btn-accent {
             background: var(--accent);
             color: var(--dark);
-            box-shadow: 0 4px 15px rgba(255, 230, 109, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 170, 0, 0.4);
         }
         .btn-accent:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 230, 109, 0.5);
+            box-shadow: 0 6px 20px rgba(255, 170, 0, 0.5);
         }
         /* Header */
         .header {
@@ -162,12 +166,12 @@
             z-index: 1000;
             padding: var(--space-sm) 0;
             transition: var(--transition-normal);
-            background: rgba(247, 255, 247, 0.95);
+            background: black;
             box-shadow: var(--shadow-sm);
         }
         .header.scrolled {
             padding: var(--space-xs) 0;
-            background: rgba(247, 255, 247, 0.98);
+            background: black;
             box-shadow: var(--shadow-md);
         }
         .nav-container {
@@ -299,7 +303,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             z-index: -1;
         }
         
@@ -341,16 +345,18 @@
             width: 100%;
         }
         .feature-card {
-            background: white;
+            background: rgb(1, 1, 1);
             padding: var(--space-lg);
             border-radius: 12px;
             box-shadow: var(--shadow-xl);
             width: 280px;
             text-align: center;
             transition: var(--transition-normal);
+            border: 1px solid rgba(255, 119, 0, 0.2);
         }
         .feature-card:hover {
             transform: translateY(-10px);
+            border-color: var(--primary);
         }
         .feature-icon {
             width: 70px;
@@ -361,11 +367,12 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto var(--space-md);
-            color: white;
+            color: var(--dark);
             font-size: var(--text-xl);
         }
         .feature-card:nth-child(2) .feature-icon {
             background: var(--secondary);
+            color: var(--light);
         }
         .feature-card:nth-child(3) .feature-icon {
             background: var(--accent);
@@ -374,7 +381,7 @@
         .feature-title {
             font-size: var(--text-lg);
             margin-bottom: var(--space-sm);
-            color: var(--dark);
+            color: var(--light);
         }
         .feature-text {
             color: var(--gray);
@@ -388,15 +395,17 @@
             margin-top: var(--space-xl);
         }
         .service-card {
-            background: white;
+            background: rgb(0, 0, 0);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             transition: var(--transition-normal);
+            border: 1px solid rgba(255, 119, 0, 0.1);
         }
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
         }
         .service-image {
             height: 200px;
@@ -422,7 +431,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--dark);
             font-size: var(--text-lg);
             margin-bottom: var(--space-md);
         }
@@ -431,8 +440,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #ff6b6b;
-        color: white;
+        background-color: var(--primary);
+        color: var(--dark);
         padding: 20px 30px;
         border-radius: 8px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -448,7 +457,8 @@
         to { opacity: 1; transform: translate(-50%, -50%); }
     }
         .service-card:nth-child(2) .service-icon {
-            background: var(--secondary);
+            background: black;
+            color: var(--light);
         }
         .service-card:nth-child(3) .service-icon {
             background: var(--accent);
@@ -456,10 +466,12 @@
         }
         .service-card:nth-child(4) .service-icon {
             background: var(--success);
+            color: var(--light);
         }
         .service-title {
             font-size: var(--text-xl);
             margin-bottom: var(--space-sm);
+            color: var(--light);
         }
         .service-text {
             color: var(--gray);
@@ -491,7 +503,7 @@
             transition: var(--transition-fast);
         }
         .service-link:hover {
-            color: var(--primary-dark);
+            color: var(--accent);
         }
         .service-link:hover i {
             transform: translateX(4px);
@@ -506,7 +518,7 @@
         }
         .filter-btn {
             padding: var(--space-xs) var(--space-lg);
-            background: white;
+            background: rgba(30, 30, 30, 0.9);
             border: 2px solid var(--primary);
             border-radius: 50px;
             font-weight: 600;
@@ -516,7 +528,11 @@
         }
         .filter-btn.active {
             background: var(--primary);
-            color: white;
+            color: var(--dark);
+        }
+        .filter-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
         }
         .fleet-grid {
             display: grid;
@@ -524,13 +540,13 @@
             gap: var(--space-lg);
         }
         .vehicle-card {
-            background: white;
+            background: rgb(0, 0, 0);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             transition: var(--transition-normal);
             position: relative;
-            border: 3px solid transparent;
+            border: 2px solid var(--primary);
         }
         .vehicle-card:hover {
             transform: translateY(-10px);
@@ -538,14 +554,14 @@
         }
         .vehicle-card.selected {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 0 0 3px rgba(255, 119, 0, 0.3);
         }
         .selected-badge {
             position: absolute;
             top: 10px;
             right: 10px;
             background: var(--primary);
-            color: white;
+            color: var(--dark);
             padding: 5px 10px;
             border-radius: 20px;
             font-size: var(--text-xs);
@@ -575,6 +591,7 @@
         .vehicle-title {
             font-size: var(--text-lg);
             margin-bottom: var(--space-md);
+            color: var(--light);
         }
         .vehicle-features {
             display: flex;
@@ -590,6 +607,9 @@
         .vehicle-feature i {
             color: var(--primary);
             margin-right: var(--space-xs);
+        }
+        .vehicle-feature span {
+            color: var(--gray);
         }
         /* About Section */
         .about-container {
@@ -616,17 +636,18 @@
             margin-top: var(--space-xl);
         }
         /* Responsive: Stack items in a single column on small screens */
-@media (max-width: 768px) {
-    .about-stats {
-        grid-template-columns: 1fr;
-    }
-}
+        @media (max-width: 768px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+        }
         .stat-item {
             text-align: center;
             padding: var(--space-lg);
-            background: white;
+            background: rgba(30, 30, 30, 0.9);
             border-radius: 12px;
             box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 119, 0, 0.1);
         }
         .stat-number {
             font-size: var(--text-xxxl);
@@ -645,7 +666,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -659,7 +680,7 @@
             visibility: visible;
         }
         .booking-form-container {
-            background: white;
+            background: rgba(30, 30, 30, 0.95);
             width: 90%;
             max-width: 600px;
             border-radius: 12px;
@@ -668,6 +689,7 @@
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
+            border: 1px solid rgba(255, 119, 0, 0.2);
         }
         .close-popup {
             position: absolute;
@@ -683,14 +705,18 @@
             transform: rotate(90deg);
         }
         .popup-vehicle-info {
-            background: var(--light);
+            background: rgba(255, 119, 0, 0.1);
             padding: var(--space-md);
             border-radius: 8px;
             margin-bottom: var(--space-lg);
+            border-left: 4px solid var(--primary);
         }
         .popup-vehicle-info h4 {
             color: var(--primary);
             margin-bottom: var(--space-xs);
+        }
+        .popup-vehicle-info p {
+            color: var(--light);
         }
         /* Contact Section */
         .contact-container {
@@ -715,12 +741,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--dark);
             font-size: var(--text-lg);
             flex-shrink: 0;
         }
         .contact-item:nth-child(2) .contact-icon {
             background: var(--secondary);
+            color: var(--light);
         }
         .contact-item:nth-child(3) .contact-icon {
             background: var(--accent);
@@ -729,6 +756,7 @@
         .contact-title {
             font-size: var(--text-lg);
             margin-bottom: var(--space-xs);
+            color: var(--light);
         }
         .contact-text {
             color: var(--gray);
@@ -757,11 +785,12 @@
         }
         .call-btn {
             background: var(--primary);
-            color: white;
+            color: var(--dark);
         }
         .call-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
+            color: var(--light);
         }
         .contact-btn i {
             margin-right: var(--space-xs);
@@ -773,19 +802,22 @@
             display: block;
             margin-bottom: var(--space-xs);
             font-weight: 500;
+            color: var(--light);
         }
         .form-control {
             width: 100%;
             padding: var(--space-sm) var(--space-md);
-            border: 1px solid #ddd;
+            border: 1px solid #444;
             border-radius: 8px;
             font-family: inherit;
             transition: var(--transition-fast);
+            background: rgba(30, 30, 30, 0.8);
+            color: var(--light);
         }
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 119, 0, 0.2);
         }
         textarea.form-control {
             min-height: 150px;
@@ -807,9 +839,11 @@
         }
         .map-input {
             padding: var(--space-sm) var(--space-md);
-            border: 1px solid #ddd;
+            border: 1px solid #444;
             border-radius: 8px;
             font-family: inherit;
+            background: rgba(30, 30, 30, 0.8);
+            color: var(--light);
         }
         .map-input:focus {
             outline: none;
@@ -824,15 +858,17 @@
         .distance-info {
             margin-top: var(--space-md);
             padding: var(--space-md);
-            background: white;
+            background: rgba(30, 30, 30, 0.9);
             border-radius: 8px;
             box-shadow: var(--shadow-sm);
             display: none;
             text-align: center;
+            border: 1px solid rgba(255, 119, 0, 0.1);
         }
         .distance-info p {
             margin-bottom: var(--space-xs);
             font-weight: 500;
+            color: var(--light);
         }
         .distance-info span {
             color: var(--primary);
@@ -847,40 +883,41 @@
             width: 100%;
             padding: var(--space-sm);
             background: var(--secondary);
-            color: white;
+            color: var(--light);
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: var(--transition-normal);
         }
         .location-btn:hover {
-            background: #3AAFA9;
+            background: #444;
         }
         /* Autocomplete Dropdown */
         .autocomplete-dropdown {
             position: absolute;
-            background: white;
-            border: 1px solid #ddd;
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid #444;
             border-top: none;
             max-height: 200px;
             overflow-y: auto;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
             border-radius: 0 0 8px 8px;
         }
         .autocomplete-item {
             padding: 10px;
             cursor: pointer;
             transition: background 0.2s;
+            color: var(--light);
         }
         .autocomplete-item:hover, .autocomplete-item.active {
-            background: #f0f0f0;
+            background: rgba(255, 119, 0, 0.2);
         }
         /* Testimonials */
         .testimonials {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
+            color: var(--dark);
             padding: var(--space-xxl) 0;
             position: relative;
             overflow: hidden;
@@ -897,10 +934,10 @@
         }
         .testimonials .section-title,
         .testimonials .section-subtitle {
-            color: white;
+            color: var(--dark);
         }
         .testimonials .section-title::after {
-            background: white;
+            background: var(--dark);
         }
         .testimonials-grid {
             display: grid;
@@ -923,12 +960,13 @@
             font-style: italic;
             margin-bottom: var(--space-md);
             position: relative;
+            color: var(--dark);
         }
         .testimonial-text::before,
         .testimonial-text::after {
             content: '"';
             font-size: var(--text-xxl);
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(0, 0, 0, 0.3);
             position: absolute;
         }
         .testimonial-text::before {
@@ -950,20 +988,22 @@
             border-radius: 50%;
             overflow: hidden;
             margin-right: var(--space-md);
-            border: 2px solid white;
+            border: 2px solid var(--dark);
         }
         .author-info h4 {
             font-size: var(--text-md);
             margin-bottom: var(--space-xs);
+            color: var(--dark);
         }
         .author-info p {
             font-size: var(--text-sm);
             opacity: 0.8;
+            color: var(--dark);
         }
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, var(--secondary), #3AAFA9);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark);
             text-align: center;
             padding: var(--space-xxl) 0;
         }
@@ -980,7 +1020,7 @@
         /* Footer */
         .footer {
             background: var(--dark);
-            color: white;
+            color: var(--light);
             padding: var(--space-xxl) 0 0;
         }
         .footer-grid {
@@ -995,7 +1035,7 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             font-size: var(--text-xl);
-            color: white;
+            color: var(--light);
             margin-bottom: var(--space-md);
         }
         .footer-logo i {
@@ -1005,6 +1045,7 @@
         }
         .footer-about {
             margin-bottom: var(--space-md);
+            color: var(--gray);
         }
         .footer-social {
             display: flex;
@@ -1028,6 +1069,7 @@
             font-size: var(--text-lg);
             margin-bottom: var(--space-lg);
             position: relative;
+            color: var(--light);
         }
         .footer-title::after {
             content: '';
@@ -1051,7 +1093,7 @@
             align-items: center;
         }
         .footer-links a:hover {
-            color: white;
+            color: var(--primary);
             transform: translateX(5px);
         }
         .footer-links i {
@@ -1081,28 +1123,6 @@
             position: fixed;
             bottom: var(--space-lg);
             right: var(--space-lg);
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--text-lg);
-            box-shadow: var(--shadow-md);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-normal);
-            z-index: 999;
-        }
-        .back-to-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
         }
         /* Floating WhatsApp Button */
         .float-whatsapp {
@@ -1174,7 +1194,7 @@
                 width: 80%;
                 max-width: 300px;
                 height: 100vh;
-                background: white;
+                background: rgb(0, 0, 0);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -1189,7 +1209,7 @@
                 margin: var(--space-md) 0;
             }
             .nav-link {
-                color: var(--dark);
+                color: white;
                 font-size: var(--text-lg);
             }
             .nav-toggle {
@@ -1239,8 +1259,8 @@
             }
         }
         .logo-image {
-    width: 80px;          /* Small width for the logo */
-    height: auto;         /* Maintain aspect ratio */
+    width: 100%;          /* Small width for the logo */
+    height: 250px;         /* Maintain aspect ratio */
     border-radius: 5px;   /* Slightly rounded corners */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     display: block;       
@@ -1249,7 +1269,7 @@
 
 .logo-image {
     max-width: 100%;
-    height: auto;
+    height: 75px;
 }
     </style>
 </head>
@@ -1258,9 +1278,9 @@
     <header class="header" id="header">
         <div class="container">
             <nav class="nav-container">
-                <a href="#" class="logo">
+                <a href="#home" class="logo">
                     <img src="https://github.com/ShabariES/Taxibooking/blob/main/logo.jpg?raw=true" alt="logo" class="logo-image">&nbsp;&nbsp;
-                    <span>Trichy Sachu Cab</span>
+                    
                 </a>
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
@@ -1292,16 +1312,16 @@
     <section class="hero" id="home">
         <div class="video-background">
             <video class="active" autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2024/06/28/218541_tiny.mp4">
+                <source src="https://cdn.pixabay.com/video/2021/02/25/66262-516980798_tiny.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2020/08/23/47901-452154275_large.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2018/10/25/18898-297379447_tiny.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2022/10/10/134312-759212642_tiny.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2024/06/24/218066_large.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop>
-                <source src="https://cdn.pixabay.com/video/2023/04/10/158316-816359649_tiny.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2024/05/29/214279_tiny.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         <div class="video-controls">
@@ -1321,11 +1341,11 @@
         </div>
         
         <div class="hero-content">
-            <h1 class="hero-title">Welcome to Trichy sachu cab's <span style:"color:orange;">!</span></h1>
+            <h1 class="hero-title">Welcome <br> to <br> Trichy sachu cab's <span style:"color:orange;">!</span></h1>
            <b> <p class="hero-subtitle">"All Over Tamil Nadu Drop Taxi Available , <br>All Over Tamil Nadu Round Trip Available ,<br> All Over Tamil Nadu Cab Available ."</p></b>
             <div class="hero-buttons">
                 <a href="#fleet" class="btn btn-primary">Book Now</a>
-                <a href="#services" class="btn btn-secondary">Learn More</a>
+<a href="#services" class="btn" style="background-color: black; color: white;">Learn More</a>
             </div>
         </div>
         <div class="hero-features">
@@ -1337,14 +1357,14 @@
                 <p class="feature-text">We're always ready to serve you, day or night</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
+                <div class="feature-icon" style="background-color: var(--primary);">
+                    <i class="fas fa-shield-alt" ></i>
                 </div>
                 <h3 class="feature-title">Safe & Secure</h3>
                 <p class="feature-text">Licensed drivers and fully insured vehicles</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">
+                <div class="feature-icon"style="background-color: var(--primary);">
                     <i class="fa-solid fa-indian-rupee-sign"></i>
 
                 </div>
