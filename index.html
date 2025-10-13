@@ -18,8 +18,8 @@
     <style>
         :root {
     /* Black & Pink Color Palette */
-    --primary: #ff00aa;
-    --primary-dark: #e500a8;
+    --primary: #e75480;
+    --primary-dark: #e5007e;
     --secondary: #333333;
     --accent: #ff0080;
     --dark: #121212;
@@ -1485,12 +1485,12 @@ textarea.form-control {
 /* Car animation - Updated to pink */
 .car__body {
     animation: shake 0.2s ease-in-out infinite alternate;
-    stroke: #ff00aa; /* pink */
+    stroke: #e75480; /* pink */
 }
 
 .car__wheel--left,
 .car__wheel--right {
-    stroke: #ff00aa; /* pink */
+    stroke: #e75480; /* pink */
     fill: #000;
 }
 
@@ -1499,7 +1499,7 @@ textarea.form-control {
     stroke-dasharray: 22;
     animation: line 0.8s ease-in-out infinite;
     animation-fill-mode: both;
-    stroke: #ff00aa; /* pink lines */
+    stroke: #e75480; /* pink lines */
 }
 
 .car__line--top { animation-delay: 0s; }
@@ -1630,7 +1630,7 @@ p {
         .hero-title {
             color: pink; /* fill color */
             -webkit-text-stroke: 5px black; /* black outline */
-            text-stroke: 2px black;
+            /* text-stroke: 2px black; */
             paint-order: stroke fill;
             font-size: 3rem;
             font-weight: 900;
@@ -1639,7 +1639,7 @@ p {
            </style>
         
         <div class="hero-content">
-            <h1 class="hero-title" style="color: var(--primary); ">Welcome <br> to <br> Trichy sachu cab's <span style="color: var(--primary);">!</span></h1>
+            <h1 class="hero-title" style="color: var(--primary); ">Welcome <br> To <br> <span style="font-size: 30px;">Trichy</span> SachuCab's <span style="color: var(--primary);">!</span></h1>
            <b> <p class="hero-subtitle" style="color: black;">"All Over Tamil Nadu Drop Taxi Available , <br>All Over Tamil Nadu Round Trip Available ,<br> All Over Tamil Nadu Cab Available ."</p></b>
             <div class="hero-buttons">
                 <a href="#fleet" class="btn btn-primary">Book Now</a>
@@ -2002,7 +2002,7 @@ p {
             <!-- Group Travel Vehicles -->
             <div class="vehicle-card" data-category="group" data-vehicle='{"name":"12 Seater Tempo","passengers":12}'>
                 <div class="vehicle-image">
-                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/12seater.webp?raw=true" alt="12 Seater Tempo Traveller">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/12seater.jpg?raw=true" alt="12 Seater Tempo Traveller">
                 </div>
                 <div class="vehicle-content">
                     <h3 class="vehicle-title">12 Seater Tempo</h3>
@@ -2049,22 +2049,7 @@ p {
                     <div class="selected-badge">SELECTED</div>
                 </div>
             </div>
-            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"Tourist Bus","passengers":21}'>
-                <div class="vehicle-image">
-                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/16-tourist.jpg?raw=true" alt="Tourist Bus">
-                </div>
-                <div class="vehicle-content">
-                    <h3 class="vehicle-title">Tourist Bus</h3>
-                    <div class="vehicle-features">
-                        <div class="vehicle-feature">
-                            <i class="fas fa-user"></i>
-                            <span>21 Passengers</span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
-                    <div class="selected-badge">SELECTED</div>
-                </div>
-            </div>
+            
             <div class="vehicle-card" data-category="group" data-vehicle='{"name":"25 Seater Kochi","passengers":25}'>
                 <div class="vehicle-image">
                     <img src="https://github.com/ShabariES/Taxibooking/blob/main/14-25seater.jpg?raw=true" alt="25 Seater Kochi">
@@ -2075,6 +2060,22 @@ p {
                         <div class="vehicle-feature">
                             <i class="fas fa-user"></i>
                             <span>25 Passengers</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary select-vehicle">Select Vehicle</button>
+                    <div class="selected-badge">SELECTED</div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-category="group" data-vehicle='{"name":"Tourist Bus","passengers":21}'>
+                <div class="vehicle-image">
+                    <img src="https://github.com/ShabariES/Taxibooking/blob/main/16-tourist.jpg?raw=true" alt="Tourist Bus">
+                </div>
+                <div class="vehicle-content">
+                    <h3 class="vehicle-title">Tourist Bus</h3>
+                    <div class="vehicle-features">
+                        <div class="vehicle-feature">
+                            <i class="fas fa-user"></i>
+                            <span>21 Passengers</span>
                         </div>
                     </div>
                     <button class="btn btn-primary select-vehicle">Select Vehicle</button>
@@ -2457,114 +2458,40 @@ p {
             });
         });
         // Vehicle Selection and Popup Form
-        let selectedVehicle = null;
-        const bookingPopup = document.getElementById('bookingPopup');
-        const closePopup = document.getElementById('closePopup');
-        const popupVehicleText = document.getElementById('popupVehicleText');
-        const popupBookingForm = document.getElementById('popupBookingForm');
-        const floatWhatsApp = document.getElementById('floatWhatsApp');
-        document.querySelectorAll('.select-vehicle').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const card = this.closest('.vehicle-card');
-                selectedVehicle = JSON.parse(card.getAttribute('data-vehicle'));
-                document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                popupVehicleText.textContent = 
-                    `${selectedVehicle.name} (${selectedVehicle.passengers} passengers )`;
-                bookingPopup.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        closePopup.addEventListener('click', function() {
-            bookingPopup.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-        bookingPopup.addEventListener('click', function(e) {
-            if (e.target === bookingPopup) {
-                bookingPopup.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-        // Autocomplete Function
-        function initAutocomplete(inputId, suggestionsId) {
-            const input = document.getElementById(inputId);
-            const suggestions = document.getElementById(suggestionsId);
-            let activeIndex = -1;
+       let selectedVehicle = null;
+const bookingPopup = document.getElementById('bookingPopup');
+const closePopup = document.getElementById('closePopup');
+const popupVehicleText = document.getElementById('popupVehicleText');
+const popupBookingForm = document.getElementById('popupBookingForm');
+const floatWhatsApp = document.getElementById('floatWhatsApp');
 
-            input.addEventListener('input', async function() {
-                const value = input.value.trim();
-                suggestions.innerHTML = '';
-                suggestions.style.display = 'none';
-                activeIndex = -1;
+document.querySelectorAll('.select-vehicle').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const card = this.closest('.vehicle-card');
+        selectedVehicle = JSON.parse(card.getAttribute('data-vehicle'));
+        document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        popupVehicleText.textContent = 
+            `${selectedVehicle.name} (${selectedVehicle.passengers} passengers )`;
+        bookingPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
 
-                if (value.length < 2) return;
+closePopup.addEventListener('click', function() {
+    bookingPopup.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
 
-                try {
-                    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(value)}&limit=5`);
-                    const data = await response.json();
-
-                    if (data.length === 0) return;
-
-                    data.forEach((place, index) => {
-                        const li = document.createElement('li');
-                        li.classList.add('autocomplete-item');
-                        li.textContent = place.display_name;
-                        li.dataset.lat = place.lat;
-                        li.dataset.lng = place.lon;
-                        li.addEventListener('click', () => {
-                            input.value = place.display_name;
-                            suggestions.style.display = 'none';
-                            if (window.map) {
-                                map.setView([place.lat, place.lon], 15);
-                                L.marker([place.lat, place.lon]).addTo(map).bindPopup(place.display_name).openPopup();
-                            }
-                        });
-                        suggestions.appendChild(li);
-                    });
-                    suggestions.style.display = 'block';
-                } catch (err) {
-                    console.error('Autocomplete error:', err);
-                }
-            });
-
-            input.addEventListener('keydown', function(e) {
-                const items = suggestions.querySelectorAll('.autocomplete-item');
-                if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    activeIndex = (activeIndex + 1) % items.length;
-                    updateActive(items);
-                } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    activeIndex = activeIndex < 0 ? items.length - 1 : activeIndex - 1;
-                    updateActive(items);
-                } else if (e.key === 'Enter' && activeIndex >= 0) {
-                    e.preventDefault();
-                    items[activeIndex].click();
-                }
-            });
-
-            function updateActive(items) {
-                items.forEach((item, index) => {
-                    item.classList.toggle('active', index === activeIndex);
-                });
-            }
-
-            document.addEventListener('click', function(e) {
-                if (e.target !== input) suggestions.style.display = 'none';
-            });
-        }
-
-        // Initialize autocomplete
-        document.addEventListener('DOMContentLoaded', function() {
-            initAutocomplete('pickup', 'pickup-suggestions');
-            initAutocomplete('destination', 'destination-suggestions');
-            initAutocomplete('popupPickup', 'popupPickup-suggestions');
-            initAutocomplete('popupDestination', 'popupDestination-suggestions');
-        });
+bookingPopup.addEventListener('click', function(e) {
+    if (e.target === bookingPopup) {
+        bookingPopup.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
 
 // Popup Form Submission to WhatsApp
-// In your popupBookingForm submit event handler
 popupBookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -2577,7 +2504,7 @@ popupBookingForm.addEventListener('submit', function(e) {
     const datetimeInput = document.getElementById('popupDatetime');
     const message = document.getElementById('popupMessage').value;
 
-    // NEW: Robust date/time formatting
+    // Robust date/time formatting
     let bookingDateTime = 'ASAP'; // Default value
     
     if (datetimeInput.value) {
@@ -2618,8 +2545,7 @@ popupBookingForm.addEventListener('submit', function(e) {
 
     bookingPopup.classList.remove('active');
     document.body.style.overflow = 'auto';
-}); // <-- FIX: Close the popupBookingForm submit event handler here
-
+});
 // Floating WhatsApp Button
 floatWhatsApp.addEventListener('click', function(e) {
     e.preventDefault();
