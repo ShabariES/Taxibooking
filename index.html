@@ -1299,6 +1299,27 @@ textarea.form-control {
     position: fixed;
     bottom: var(--space-lg);
     right: var(--space-lg);
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: var(--dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    z-index: 999;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    background: var(--primary-dark);
+}
+
+.back-to-top.active {
+    display: flex;
 }
 
 /* Floating WhatsApp Button */
@@ -1468,6 +1489,7 @@ textarea.form-control {
     justify-content: center;
     z-index: 9999;
     transition: opacity 1s ease, visibility 1s ease;
+    flex-direction: column;
 }
 
 #intro.fade-out {
@@ -1547,6 +1569,31 @@ h1 {
 p {
     color: #ccc;
 }
+
+.hero-title {
+    color: pink; /* fill color */
+    -webkit-text-stroke: 5px rgb(255, 252, 252); /* black outline */
+    /* text-stroke: 2px black; */
+    paint-order: stroke fill;
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.hero-subtitle{
+    -webkit-text-stroke: 0.2px rgb(255, 252, 252);
+}
+
+.loading-text {
+    color: var(--primary);
+    margin-top: 20px;
+    font-size: 1.5rem;
+}
+.hero {
+  background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
+  text-align: center;
+  padding: 60px 20px;
+}
+
 </style>
 </head>
 <body>
@@ -1556,7 +1603,7 @@ p {
 
   
   <div class="loader">
-    <svg class="car" width="120" height="50" xmlns="http://www.w3.org/2000/svg">
+    <svg class="car" width="120" height="50" xmlns="http://www.w3.org2000/svg">
       <g transform="translate(2 1)" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
         <path class="car__body" d="M47.293 2.375C52.927.792 54.017.805 54.017.805c2.613-.445 6.838-.337 9.42.237l8.381 1.863c2.59.576 6.164 2.606 7.98 4.531l6.348 6.732 6.245 1.877c3.098.508 5.609 3.431 5.609 6.507v4.206c0 .29-2.536 4.189-5.687 4.189H36.808c-2.655 0-4.34-2.1-3.688-4.67 0 0 3.71-19.944 14.173-23.902zM36.5 15.5h54.01" stroke-width="3"/>
         <ellipse class="car__wheel--left" stroke-width="3.2" cx="83.493" cy="30.25" rx="6.922" ry="6.808"/>
@@ -1568,7 +1615,7 @@ p {
     </svg>
   </div>
 
-  <h1 class="loading-text" style="color: var(--primary);">Loading...</h1>
+  <h1 class="loading-text">Loading...</h1>
 </div>
 
   <!-- Main Content -->
@@ -1620,28 +1667,6 @@ p {
     </header>
     <!-- Hero Section -->
     <section class="hero" id="home">
-           <style>
-   .hero {
-  background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
-  text-align: center;
-  padding: 60px 20px;
-}
-
-
-        .hero-title {
-            color: pink; /* fill color */
-            -webkit-text-stroke: 5px rgb(255, 252, 252); /* black outline */
-            /* text-stroke: 2px black; */
-            paint-order: stroke fill;
-            font-size: 3rem;
-            font-weight: 900;
-        }
-        .hero-subtitle{
-              -webkit-text-stroke: 0.2px rgb(255, 252, 252);
-        }
-        
-           </style>
-        
         <div class="hero-content">
             <h1 class="hero-title" style="color: black ">Welcome <br> To <br> <span style="font-size: 30px;">Trichy</span> SachuCab's <span style="color: var(--primary);"></span></h1>
            <b> <p class="hero-subtitle" style="color: rgb(0, 0, 0);">"All Over Tamil Nadu Drop Taxi Available , <br>All Over Tamil Nadu Round Trip Available ,<br> All Over Tamil Nadu Cab Available ."</p></b>
@@ -2255,7 +2280,9 @@ p {
                     </div>
                 </div>
                 <button id="calculate-route" class="btn btn-accent">Calculate Route</button>
-                <button id="current-location" class="location-btn" style="background-color: black; border:var(--accent) ;">
+                <br>
+                <br>
+                <button id="current-location" class="location-btn" style="background-color: black; border:var(--accent) ; display: none;">
                     <i class="fas fa-location-arrow"></i> Use Current Location
                 </button>
                 <div id="map"></div>
@@ -2382,8 +2409,17 @@ p {
     </footer>
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top" id="backToTop" style="display: none;">
-        <i class="fas fa-arrow-up"></i>
+        <i class="fas fa-arrow-up" style="display: none;"></i>
     </a>
+    <style>
+        #backToTop {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+    </style>
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/919514124166" class="float-whatsapp" id="floatWhatsApp">
         <i class="fab fa-whatsapp"></i>
@@ -2420,9 +2456,9 @@ p {
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
-                backToTop.classList.add('active');
+                backToTop.style.display = 'flex';
             } else {
-                backToTop.classList.remove('active');
+                backToTop.style.display = 'none';
             }
         });
         // Back to Top click event
@@ -2616,199 +2652,217 @@ contactForm.addEventListener('submit', function(e) {
 
         // Initialize the map
 document.addEventListener('DOMContentLoaded', function() {
-     const map = L.map('map').setView([10.7905, 78.7047], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+    // Fix map initialization
+    const map = L.map('map').setView([10.7905, 78.7047], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-               const marker = L.marker([10.7905, 78.7047]).addTo(map)
+    const marker = L.marker([10.7905, 78.7047]).addTo(map)
         .bindPopup('<b>Trichy Sachu Cab Headquarters</b><br>No - 2, MMM TOWER, Nandhi Koil St, Theppakulam, Tiruchirappalli, Tamil Nadu 620002')
         .openPopup();
 
-            let routeControl;
+    let routeControl;
 
-            async function geocode(address) {
-                try {
-                    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
-                    const data = await response.json();
-                    if (data.length > 0) {
-                        return {
-                            lat: parseFloat(data[0].lat),
-                            lng: parseFloat(data[0].lon),
-                            address: data[0].display_name
-                        };
-                    }
-                    return null;
-                } catch (error) {
-                    console.error('Geocoding error:', error);
-                    return null;
-                }
+    async function geocode(address) {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+            const data = await response.json();
+            if (data.length > 0) {
+                return {
+                    lat: parseFloat(data[0].lat),
+                    lng: parseFloat(data[0].lon),
+                    address: data[0].display_name
+                };
             }
-
-            const currentLocationBtn = document.getElementById('current-location');
-            currentLocationBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        async (position) => {
-                            const { latitude, longitude } = position.coords;
-                            try {
-                                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                                const data = await response.json();
-                                if (data.display_name) {
-                                    document.getElementById('pickup').value = data.display_name;
-                                } else {
-                                    document.getElementById('pickup').value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
-                                }
-                            } catch (error) {
-                                document.getElementById('pickup').value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
-                            }
-                        },
-                        (error) => {
-                            alert('Unable to retrieve your location.');
-                        },
-                        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-                    );
-                } else {
-                    alert('Geolocation not supported.');
-                }
-            });
-
-            async function calculateRoute() {
-                const pickup = document.getElementById('pickup').value;
-                const destination = document.getElementById('destination').value;
-                if (!pickup || !destination) {
-                    alert('Please enter both pickup and destination.');
-                    return;
-                }
-                try {
-                    const pickupLocation = await geocode(pickup);
-                    const destinationLocation = await geocode(destination);
-                    if (!pickupLocation || !destinationLocation) {
-                        alert('Could not find locations.');
-                        return;
-                    }
-                    if (routeControl) map.removeControl(routeControl);
-                    routeControl = L.Routing.control({
-                        waypoints: [
-                            L.latLng(pickupLocation.lat, pickupLocation.lng),
-                            L.latLng(destinationLocation.lat, destinationLocation.lng)
-                        ],
-                        routeWhileDragging: true,
-                        show: false,
-                        lineOptions: { styles: [{color: '#FF6B6B', opacity: 0.7, weight: 5}] },
-                        addWaypoints: false,
-                        draggableWaypoints: false,
-                        createMarker: function(i, wp) {
-                            return L.marker(wp.latLng, {
-                                icon: L.icon({
-                                    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-                                    iconSize: [25, 41],
-                                    iconAnchor: [12, 41]
-                                })
-                            }).bindPopup(i === 0 ? 'Pickup Location' : 'Destination');
-                        }
-                    }).addTo(map);
-                    map.fitBounds([
-                        [pickupLocation.lat, pickupLocation.lng],
-                        [destinationLocation.lat, destinationLocation.lng]
-                    ], { padding: [50, 50] });
-                    routeControl.on('routesfound', function(e) {
-                        const routes = e.routes;
-                        const distance = (routes[0].summary.totalDistance / 1000).toFixed(2) + ' km';
-                        const duration = Math.floor(routes[0].summary.totalTime / 60) + ' mins';
-                        document.getElementById('distance').textContent = distance;
-                        document.getElementById('duration').textContent = duration;
-                        document.getElementById('distance-info').style.display = 'block';
-                    });
-                } catch (error) {
-                    alert('Error calculating route.');
-                }
-            }
-
-            document.getElementById('calculate-route').addEventListener('click', calculateRoute);
-            document.getElementById('pickup').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') calculateRoute();
-            });
-            document.getElementById('destination').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') calculateRoute();
-            });
-        });
-         // Function to show popup
-    function showProtectionMessage() {
-        const popup = document.getElementById('protectionPopup');
-        popup.style.display = 'block';
-        
-        // Hide after 2 seconds
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 2000);
+            return null;
+        } catch (error) {
+            console.error('Geocoding error:', error);
+            return null;
+        }
     }
 
-    // // Disable right-click context menu
-     document.addEventListener('contextmenu', function(e) {
-         e.preventDefault();
-         showProtectionMessage();
-     });
-
-    // Disable keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
-        // Disable Ctrl+U (View Source)
-        if (e.ctrlKey && e.keyCode === 85) {
-            e.preventDefault();
-             showProtectionMessage();
-        }
-        // Disable F12 (Developer Tools)
-        else if (e.keyCode === 123) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable Ctrl+Shift+I (DevTools)
-        else if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable Ctrl+Shift+J (Console)
-        else if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
-            e.preventDefault();
-            showProtectionMessage();
-        }
-        // Disable Ctrl+Shift+C (Inspect)
-        else if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
-            e.preventDefault();
-            showProtectionMessage();
+    const currentLocationBtn = document.getElementById('current-location');
+    currentLocationBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    try {
+                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                        const data = await response.json();
+                        if (data.display_name) {
+                            document.getElementById('pickup').value = data.display_name;
+                        } else {
+                            document.getElementById('pickup').value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                        }
+                    } catch (error) {
+                        document.getElementById('pickup').value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                    }
+                },
+                (error) => {
+                    alert('Unable to retrieve your location.');
+                },
+                { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+            );
+        } else {
+            alert('Geolocation not supported.');
         }
     });
-    document.addEventListener('DOMContentLoaded', function() {
-            initAutocomplete('pickup', 'pickup-suggestions');
-            initAutocomplete('destination', 'destination-suggestions');
-            initAutocomplete('popupPickup', 'popupPickup-suggestions');
-            initAutocomplete('popupDestination', 'popupDestination-suggestions');
-            
-            // Video Background Slideshow
-            const videos = document.querySelectorAll('.video-background video');
-            let currentVideo = 0;
-            
-            // Show the first video
-            videos[currentVideo].classList.add('active');
-            
-            // Set interval to rotate videos
-            setInterval(() => {
-                // Hide current video
-                videos[currentVideo].classList.remove('active');
-                
-                // Move to next video
-                currentVideo = (currentVideo + 1) % videos.length;
-                
-                // Show next video
-                videos[currentVideo].classList.add('active');
-            }, 8000); // Change video every 8 seconds
-            
-            // Ensure all videos are playing (some browsers require this)
-            videos.forEach(video => {
-                video.play().catch(e => console.log('Video autoplay prevented:', e));
+
+    async function calculateRoute() {
+        const pickup = document.getElementById('pickup').value;
+        const destination = document.getElementById('destination').value;
+        if (!pickup || !destination) {
+            alert('Please enter both pickup and destination.');
+            return;
+        }
+        try {
+            const pickupLocation = await geocode(pickup);
+            const destinationLocation = await geocode(destination);
+            if (!pickupLocation || !destinationLocation) {
+                alert('Could not find locations.');
+                return;
+            }
+            if (routeControl) map.removeControl(routeControl);
+            routeControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(pickupLocation.lat, pickupLocation.lng),
+                    L.latLng(destinationLocation.lat, destinationLocation.lng)
+                ],
+                routeWhileDragging: true,
+                show: false,
+                lineOptions: { styles: [{color: '#FF6B6B', opacity: 0.7, weight: 5}] },
+                addWaypoints: false,
+                draggableWaypoints: false,
+                createMarker: function(i, wp) {
+                    return L.marker(wp.latLng, {
+                        icon: L.icon({
+                            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41]
+                        })
+                    }).bindPopup(i === 0 ? 'Pickup Location' : 'Destination');
+                }
+            }).addTo(map);
+            map.fitBounds([
+                [pickupLocation.lat, pickupLocation.lng],
+                [destinationLocation.lat, destinationLocation.lng]
+            ], { padding: [50, 50] });
+            routeControl.on('routesfound', function(e) {
+                const routes = e.routes;
+                const distance = (routes[0].summary.totalDistance / 1000).toFixed(2) + ' km';
+                const duration = Math.floor(routes[0].summary.totalTime / 60) + ' mins';
+                document.getElementById('distance').textContent = distance;
+                document.getElementById('duration').textContent = duration;
+                document.getElementById('distance-info').style.display = 'block';
             });
-        });
+        } catch (error) {
+            alert('Error calculating route.');
+        }
+    }
+
+    document.getElementById('calculate-route').addEventListener('click', calculateRoute);
+    document.getElementById('pickup').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') calculateRoute();
+    });
+    document.getElementById('destination').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') calculateRoute();
+    });
+    
+    // Initialize autocomplete functionality
+    initAutocomplete('pickup', 'pickup-suggestions');
+    initAutocomplete('destination', 'destination-suggestions');
+    initAutocomplete('popupPickup', 'popupPickup-suggestions');
+    initAutocomplete('popupDestination', 'popupDestination-suggestions');
+});
+
+// Autocomplete function
+function initAutocomplete(inputId, suggestionsId) {
+    const input = document.getElementById(inputId);
+    const suggestions = document.getElementById(suggestionsId);
+    
+    input.addEventListener('input', async function() {
+        const query = this.value;
+        if (query.length < 3) {
+            suggestions.innerHTML = '';
+            return;
+        }
+        
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5`);
+            const data = await response.json();
+            
+            suggestions.innerHTML = '';
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'autocomplete-item';
+                li.textContent = item.display_name;
+                li.addEventListener('click', function() {
+                    input.value = item.display_name;
+                    suggestions.innerHTML = '';
+                });
+                suggestions.appendChild(li);
+            });
+        } catch (error) {
+            console.error('Autocomplete error:', error);
+        }
+    });
+    
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!input.contains(e.target) && !suggestions.contains(e.target)) {
+            suggestions.innerHTML = '';
+        }
+    });
+}
+
+// Function to show popup
+function showProtectionMessage() {
+    const popup = document.getElementById('protectionPopup');
+    popup.style.display = 'block';
+    
+    // Hide after 2 seconds
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 2000);
+}
+
+// // Disable right-click context menu
+ document.addEventListener('contextmenu', function(e) {
+     e.preventDefault();
+     showProtectionMessage();
+ });
+
+// Disable keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Disable Ctrl+U (View Source)
+    if (e.ctrlKey && e.keyCode === 85) {
+        e.preventDefault();
+         showProtectionMessage();
+    }
+    // Disable F12 (Developer Tools)
+    else if (e.keyCode === 123) {
+        e.preventDefault();
+        showProtectionMessage();
+    }
+    // Disable Ctrl+Shift+I (DevTools)
+    else if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+        e.preventDefault();
+        showProtectionMessage();
+    }
+    // Disable Ctrl+Shift+J (Console)
+    else if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+        e.preventDefault();
+        showProtectionMessage();
+    }
+    // Disable Ctrl+Shift+C (Inspect)
+    else if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+        e.preventDefault();
+        showProtectionMessage();
+    }
+});
 
     </script>
 </body>
