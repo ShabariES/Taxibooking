@@ -1876,8 +1876,86 @@ p {
   font-weight: bold;
   margin: 0;
 }
+ .shab {
+    background-color: #000;
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    max-width: 900px; /* Wider layout */
+    margin: 50px auto;
+    font-family: "Poppins", sans-serif;
+    display: flex; /* Horizontal layout */
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
+  .shab:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+  }
 
+  .shab-content {
+    flex: 1;
+  }
+
+  .shab h2 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .shab p {
+    color: #ddd;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .shab ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 10px;
+  }
+
+  .shab li {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+
+  .shab li:hover {
+    background: rgba(222, 60, 109, 0.3);
+  }
+
+  /* Optional image or icon space */
+  .shab-image {
+    flex: 0 0 250px;
+  }
+
+  .shab-image img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  /* Responsive for mobile */
+  @media (max-width: 768px) {
+    .shab {
+      flex-direction: column;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .shab ul {
+      grid-template-columns: 1fr;
+    }
+  }
 
 </style>
 </head>
@@ -1955,10 +2033,10 @@ p {
         <div class="hero-content">
             <h1 class="hero-title" style="color: black ">Welcome <br> To <br> <span style="font-size: 30px;">Trichy</span> SachuCab's <span style="color: var(--primary);"></span></h1>
 <div class="hero-card">
-  <p class="hero-subtitle">
-    "All Over Tamil Nadu One Way Drop Taxi Available, <br>
-    All Over Tamil Nadu Round Trip Available, <br>
-    All Over Tamil Nadu Cab Available."
+  <p class="hero-subtitle" >
+   * &nbsp; All Over Tamil Nadu One Way Drop Taxi Available <br>
+   * &nbsp; All Over Tamil Nadu Round Trip Available <br>
+   * &nbsp; All Over Tamil Nadu Cab Available.
   </p>
 </div>
 <br>
@@ -2647,7 +2725,7 @@ p {
                     <i class="fab fa-google-play"></i> Google Play
                 </a>
             </div>
-        </div>
+           
     </section>
     <!-- Footer -->
     <footer class="footer">
@@ -2712,6 +2790,117 @@ p {
   opacity: 0;
   pointer-events: none;
 }
+/* Mobile Navbar with Centered Logo and Hamburger Menu */
+@media (max-width: 768px) {
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 15px 20px; /* Increased padding for more height */
+        min-height: 80px;   /* Ensures consistent navbar height */
+    }
+    
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        justify-content: center;
+        margin: 0;
+    }
+    
+    .logo-image {
+        height: 90px;
+        margin: 0 auto;
+    }
+    
+    /* Keep hamburger menu on the right */
+    .nav-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+    
+    /* Hamburger menu styles remain the same */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgb(0, 0, 0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: var(--transition-normal);
+        z-index: 1000;
+        padding: var(--space-xl) 0;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-item {
+        margin: var(--space-md) 0;
+    }
+    
+    .nav-link {
+        color: white;
+        font-size: var(--text-lg);
+        padding: 12px 20px;
+    }
+    
+    /* Adjust header for mobile */
+    .header {
+        padding: 12px 0; /* More padding = taller navbar */
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 576px) {
+    .logo-image {
+        height: 90px;
+    }
+    
+    .nav-container {
+        padding: 18px 16px; /* Slightly more vertical padding */
+        min-height: 85px;   /* Increase navbar height for smaller screens */
+    }
+    
+    .nav-menu {
+        width: 85%;
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .logo-image {
+        height: 90px;
+    }
+    
+    .nav-menu {
+        padding-top: 80px;
+        overflow-y: auto;
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 400px) {
+    .logo {
+        max-width: 120px;
+    }
+    
+    .logo-image {
+        height: 90px;
+    }
+    
+    .nav-container {
+        min-height: 75px; /* Maintain some height even on tiny screens */
+    }
+}
+
 
     </style>
     <!-- Floating WhatsApp Button -->
