@@ -2716,12 +2716,12 @@ p {
         </div>
     </div>
     <!-- CTA Section -->
-  <section class="section cta" style="text-align: center; padding: 60px 20px; background-color: #121212; color: #fff;">
+ <section class="section cta" style="text-align: center; padding: 60px 20px; background-color: #121212; color: #fff;">
   <div class="container">
     <h2 class="cta-title" style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">Ready to Ride With Us?</h2>
     <p class="cta-text" style="font-size: 1.1rem; color: #ddd; margin-bottom: 40px;">Book your comfortable and convenient ride anytime, anywhere!</p>
 
-    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: nowrap;">
+    <div class="cards-row" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
       <!-- Card 1 -->
       <div class="card" style="
         flex: 0 0 45%;
@@ -2731,6 +2731,7 @@ p {
         border: none;
         background-color: #1e1e1e;
         text-align: left;
+        min-width: 280px;
       ">
         <div class="row g-0 align-items-stretch">
           <div class="col-5">
@@ -2759,6 +2760,7 @@ p {
         border: none;
         background-color: #1e1e1e;
         text-align: left;
+        min-width: 280px;
       ">
         <div class="row g-0 align-items-stretch">
           <div class="col-5">
@@ -2779,7 +2781,21 @@ p {
       </div>
     </div>
   </div>
+
+  <style>
+    @media (max-width: 768px) {
+      .cards-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .cards-row .card {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
 </section>
+
 
 
     <!-- Footer -->
